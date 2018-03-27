@@ -8,7 +8,7 @@ def sentiment(text):
          'text': text}
     ]}
 
-    subscription_key = "ce2e46b3f111441bb9327ec9fb43db16"
+    subscription_key = "<Key>"
     assert subscription_key
 
     text_analytics_base_url = "https://westcentralus.api.cognitive.microsoft.com/text/analytics/v2.0/"
