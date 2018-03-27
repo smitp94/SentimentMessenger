@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;}
+    }
+  </style>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+<style>
+    .nameblock{
+  background: #7f6bce;
+  color: #ffffff;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
+    margin-bottom: 60px;
+
+}
+.sidenav {
+    background-color: #352e4e;
+    height: 100%;
+}
+input{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-size: medium;
+
+}
+.switch {
+  position: relative;
+  margin-top: 6px;
+  margin-bottom: 35px;
+  width: 100%;
+  height: 40px;
+  border: 3px solid #45f;
+  color: #ffffff;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.quality {
+    position: relative;
+    display: inline-block;
+    width: 33.333%;
+    height: 100%;
+    line-height: 40px;
+}
+.quality:first-child label {
+  border-radius: 5px 0 0 5px;
+}
+.quality:last-child label {
+  border-radius: 0 5px 5px 0;
+}
+.quality label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  font-style: italic;
+  text-align: center;
+  transition: transform 0.4s, color 0.4s, background-color 0.4s;
+}
+.quality input[type="radio"] {
+  appearance: none;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+.quality input[type="radio"]:focus {
+  outline: 0;
+  outline-offset: 0;
+}
+.quality input[type="radio"]:checked ~ label {
+  background-color: #55825d;
+  color: #ffffff;
+}
+.quality input[type="radio"]:active ~ label {
+  transform: scale(1.05);
+}
+
+</style>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav">
+      <h4 class="nameblock">Hi {{ result[0] }}!</h4>
+      <form action = "/send" method="post" class="form-group" >
+          <input id="USno" style="margin-bottom: 35px; font-size:medium;" class="form-control" type='tel' name="cust_number" placeholder='Format: +99999999999' maxlength="12">
+          <div class='switch'><div class='quality'>
+    <input checked id='q1' name='type' type='radio' value='Lime'>
+    <label for='q1'>Lime</label>
+  </div><div class='quality'>
+    <input id='q2' name='type' type='radio' value='Vanilla'>
+    <label for='q2'>Vanilla</label>
+  </div><div class='quality'>
+    <input id='q3' name='type' type='radio' value='Cherry'>
+    <label for='q3'>Cherry</label>
+  </div>
+</div>
+          <input class="form-control" type="text" style="margin-bottom: 45px; font-size:medium;" name="name" size="25" placeholder="Customer Name">
+        <input class="btn btn-warning" type="submit" value="Send" style="height: 44.5px;font-size: medium;font-family: sans-serif;font-weight: bold;" >
+
+    </div>
+
+    <div class="col-sm-9" style="background-color: #aab0c7;">
+        <h1 style=" margin-bottom: 35px; margin-top: 15px;">Message Templates</h1>
+
+
+        <div>
+            <h2> First Automated Message </h2>
+            <input type="text" class="form-control" name="first_message" style="margin-bottom: 30px; font-size:medium;" value="Hi <firstName>, I saw that your <productType> was delivered. How are you enjoying it so far?">
+        </div>
+
+        <div>
+            <h2> Positive Response </h2>
+            <input  type="text" class="form-control" name="positive" style="margin-bottom: 30px; font-size:medium;" value="Great! Can you describe what you love most about <productType>?">
+        </div>
+
+        <div>
+            <h2> Negative Response </h2>
+            <input type="text" class="form-control" name="negative" style="margin-bottom: 30px; font-size:medium;" value="I'm sorry to hear that, what do you dislike about <productType>?">
+        </div>
+    </div>
+      </form>
+
+  </div>
+    <form action = "/logout" method="post" class="form-group">
+            <input type="submit" class="btn btn-danger" value="Log Out" style="    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 68px;">
+        </form>
+</div>
+
+<footer class="container-fluid">
+  <p>By Smit Patel</p>
+</footer>
+
+</body>
+</html>
