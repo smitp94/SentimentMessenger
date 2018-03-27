@@ -1,0 +1,80 @@
+   .nameblock{
+  background: #7f6bce;
+  color: #ffffff;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
+    margin-bottom: 60px;
+
+}
+.sidenav {
+    background-color: #352e4e;
+    height: 100%;
+}
+input{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-size: medium;
+
+}
+.switch {
+  position: relative;
+  margin-top: 6px;
+  margin-bottom: 35px;
+  width: 100%;
+  height: 40px;
+  border: 3px solid #45f;
+  color: #ffffff;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.quality {
+    position: relative;
+    display: inline-block;
+    width: 33.333%;
+    height: 100%;
+    line-height: 40px;
+}
+.quality:first-child label {
+  border-radius: 5px 0 0 5px;
+}
+.quality:last-child label {
+  border-radius: 0 5px 5px 0;
+}
+.quality label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  font-style: italic;
+  text-align: center;
+  transition: transform 0.4s, color 0.4s, background-color 0.4s;
+}
+.quality input[type="radio"] {
+  appearance: none;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+.quality input[type="radio"]:focus {
+  outline: 0;
+  outline-offset: 0;
+}
+.quality input[type="radio"]:checked ~ label {
+  background-color: #55825d;
+  color: #ffffff;
+}
+.quality input[type="radio"]:active ~ label {
+  transform: scale(1.05);
+}
