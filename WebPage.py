@@ -22,7 +22,7 @@ def index():
 
 @app.route('/log_out', methods=['GET', 'POST'])
 def log_oout():
-    os.environ['u_id'] = 'admin'
+    #os.environ['u_id'] = 'admin'
     session['name'] = ""
     return render_template('login.html')
 
@@ -30,11 +30,12 @@ def log_oout():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     # global u_id
+    user_id = request.values.get('user_id', None)
     os.environ['u_id'] = request.values.get('user_id', None)
     password = request.values.get('password', None)
-    answer_list = verify_user(os.environ['u_id'], password)
+    answer_list = verify_user(user_id, password)
 
-    def_messages = get_message_template(os.environ['u_id'])
+    def_messages = get_message_template(user_id)
     data = []
     first = "value=\'"+def_messages[0].strip()+"'"
 
@@ -76,8 +77,8 @@ def send_response():
     product = get_customer_product(cust_number)
 
     # get positive and negative message
-    messages = get_message_template(os.environ['u_id'])
-
+    # messages = get_message_template(os.environ['u_id'])
+    messages = get_message_template("admin")
     positive = messages[1].replace("<productType>", product)
 
     negative = messages[2].replace("<productType>", product)
@@ -108,7 +109,7 @@ def send():
     insert_customer(cust_name, cust_number, type)
 
     # message template to db
-    insert_messageTemplate(os.environ['u_id'], first_message, positive, negative)
+    # insert_messageTemplate("admin", first_message, positive, negative)
 
     # def_messages = get_message_template(os.environ['u_id'])
     data = []

@@ -46,8 +46,10 @@ def insert_customer(name, number, product):
         'number': number,
         'product': product
     }
-    result = customer.insert_one(post_customer)
-    print('One post: {0}'.format(result.inserted_id))
+    # result = customer.insert_one(post_customer)
+
+    customer.update({"number": number}, {"$set": post_customer}, upsert=True)
+    # print('One post: {0}'.format(result.inserted_id))
 
 
 def insert_messageTemplate(id, first_message, positive, negative):
@@ -77,6 +79,6 @@ def get_message_template(u_id):
     db = setConn()
 
     message = db.MessageTemplate
-    message_details = message.find_one({'id': u_id})
+    message_details = message.find_one({'id': "admin"})
 
     return [message_details['first_message'], message_details['positive'], message_details['negative']]
