@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, session, request
 from flask import session
 from MSSentiment import *
 from TwilioAPI import *
@@ -17,6 +17,12 @@ os.environ['u_id'] = 'admin'
 @app.route('/')
 @app.route('/index')
 def index():
+    if 'name' in session:
+        data = []
+        data.insert(0, session['name'])
+        # os.environ['u_id'] = u_id
+        # return render_template('dashboard.html', result=session['name'])
+        return render_template('dashboard.html', result=data)
     return render_template('login.html')
 
 
@@ -24,6 +30,7 @@ def index():
 def log_oout():
     #os.environ['u_id'] = 'admin'
     session['name'] = ""
+    session.pop('name', None)
     return render_template('login.html')
 
 
@@ -78,7 +85,13 @@ def send_response():
 
     # get positive and negative message
     # messages = get_message_template(os.environ['u_id'])
-    messages = get_message_template("admin")
+    # messages = get_message_template("admin")
+    name = "admin"
+    if 'name' in session:
+        name = session["name"]
+    print ("name: " + name)
+    # messages = get_message_template(name)
+    messages = get_message_templateC(cust_number)
     positive = messages[1].replace("<productType>", product)
 
     negative = messages[2].replace("<productType>", product)
@@ -109,7 +122,7 @@ def send():
     insert_customer(cust_name, cust_number, type)
 
     # message template to db
-    # insert_messageTemplate("admin", first_message, positive, negative)
+    insert_messageTemplateC(cust_number, first_message, positive, negative)
 
     # def_messages = get_message_template(os.environ['u_id'])
     data = []
